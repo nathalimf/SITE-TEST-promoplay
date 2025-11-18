@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promoplay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="home.css">
+  <link rel="icon" type="image/png" href="https://i.postimg.cc/3NNfpt6c/pixel-arte-jogos-moeda-moeda-removebg-preview.png">
+</head>
+<body>
+  <header>
+    <h1>Promoplay <img src="https://i.postimg.cc/KvqKdbyP/image.png" alt="coin" id="coin" height="25px"></h1>
+    <div class="perfil">
+      <span>Perfil</span>
+      <div class="perfil-img"></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="search-box">
+      <div class="search-bar">
+        <button class="voltar-btn">↩ Voltar</button>
+        <input type="text" id="searchInput" placeholder="Buscar jogos">
+        <button class="buscar-btn">Buscar jogos</button>
+        <button class="favoritos-btn" id="favoritosBtn">Favoritos ❤️</button>
+        <button class="darkmode-btn" id="darkModeBtn">🌙</button>
+      </div>
+
+      <p class="ofertas-text" id="ofertasText">🎮 Ofertas encontradas</p>
+      <div class="cards" id="gameList"></div>
+      <div id="loadMoreContainer" style="text-align:center; margin-top:20px;"></div>
+    </div>
+  </main>
+
+  <footer>
+    Dados por <a href="https://www.cheapshark.com/">CheapShark</a>.  
+    Para mais informações, entre em contato com promoplay@gmail.com
+  </footer>
+
+  <script type="module" src="home.js"></script>
+</body>
+</html>
