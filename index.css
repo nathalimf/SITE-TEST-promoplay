@@ -1,0 +1,345 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+* {
+  font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0d1a3e;
+    color: #e5e7eb;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 25px;
+  
+}
+
+header h1 {
+  font-size: 23px;
+  -webkit-text-stroke: 1px #0A317D; /* Borda no texto */
+  paint-order: stroke fill;
+  font-size: 26px;
+}
+
+
+.logo {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #facc15;
+    margin: 0;
+    text-decoration: none;
+}
+
+.nav-button {
+    background-color: #facc15;
+    color: #172554;
+    font-weight: 700;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: #fde047;
+}
+
+.carousel-section {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.section-title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 3rem;
+    margin-top: 0;
+}
+
+.carousel-container {
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide {
+    min-width: 100%;        /* garante que cada slide ocupa uma tela */
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #0d1a3e;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;    /* mantém a imagem correta */
+    display: block;         /* evita o slide puxar o próximo */
+    border-radius: 8px;
+}
+.carousel-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 2.5rem 1rem 1rem;
+    text-align: center;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.3);
+    color: white;
+    padding: 0.75rem;
+    border-radius: 9999px;
+    margin: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 10;
+}
+
+.carousel-button:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.carousel-button.prev {
+    left: 0;
+}
+
+.carousel-button.next {
+    right: 0;
+}
+
+.carousel-button svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    display: block;
+}
+
+.carousel-dots {
+    position: absolute;
+    bottom: 3.2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 10;
+}
+
+.carousel-dots button {
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 9999px;
+    background-color: rgba(156, 163, 175, 0.5);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-dots button.active {
+    background-color: #facc15;
+}
+
+.info-section {
+    padding-bottom: rem;
+    text-align: center;
+}
+
+.info-title {
+    font-size: 1.875rem;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 23px;
+    margin-top: 0;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.info-subtitle {
+    font-size: 1.125rem;
+    color: #d1d5db;
+    max-width: 48rem;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3rem;
+    line-height: 23px;
+}
+
+.info-details {
+    max-width: 70rem;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: justify;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: #d1d5db;
+    font-size: 1.125rem;
+    line-height: 23px;
+}
+
+.info-details p {
+    margin: 0;
+}
+
+.highlight {
+    color: #facc15;
+    font-weight: 700;
+}
+
+.info-actions {
+    margin-top: 5rem;
+    margin-bottom: -1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.action-button {
+    display: inline-block;
+    font-weight: 700;
+    padding: 0.75rem 2.5rem;
+    border-radius: 0.5rem;
+    font-size: 1.125rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.action-button:hover {
+    transform: scale(1.05);
+}
+
+.action-button.primary {
+    background-color: #facc15;
+    color: #172554;
+}
+
+.action-button.primary:hover {
+    background-color: #fde047;
+}
+
+.action-button.secondary {
+    background-color: transparent;
+    border: 2px solid #facc15;
+    color: #facc15;
+}
+
+.action-button.secondary:hover {
+    background-color: #facc15;
+    color: #172554;
+}
+
+.footer {
+    text-align: center;
+    padding: 2rem;
+    color: #9ca3af;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer-credit {
+    margin-top: 0.5rem;
+}
+
+.footer-link {
+    color: #eab308;
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    text-decoration: underline;
+}
+
+@media (min-width: 640px) {
+    .info-actions {
+        flex-direction: row;
+    }
+}
+
+@media (min-width: 768px) {
+    .carousel-section {
+        padding-top: 2rem;
+        padding-bottom: 5rem;
+    }
+    .section-title {
+        font-size: 2.25rem;
+    }
+    .info-section {
+        padding-bottom: 8rem;
+    }
+    .info-title {
+        font-size: 2.25rem;
+    }
+    .info-subtitle {
+        font-size: 1.25rem;
+    }
+    .info-details {
+        font-size: 1.125rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .info-title {
+        font-size: 3rem;
+    }
+}
+
+#coin {
+  position: relative;
+  vertical-align: -4px;
+  left: -2px;
+}
+
+.coingif {
+    width: 80px;
+    height: 80px;
+}
