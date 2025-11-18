@@ -1,7 +1,5 @@
-/* Importa fonte */
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;600;700&display=swap');
 
-/* Reset */
 * {
   font-family: "Josefin Sans", sans-serif;
   margin: 0;
@@ -9,7 +7,6 @@
   box-sizing: border-box;
 }
 
-/* Corpo */
 body {
   background-color: #021D55;
   color: #fff;
@@ -19,19 +16,17 @@ body {
   transition: background 0.3s ease;
 }
 
-/* Cabeçalho */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 22px 25px;
   background: linear-gradient(-180deg, rgba(0, 15, 46, 1) 14%, rgba(2, 29, 85, 1) 100%);
-  
 }
 
 header h1 {
   font-size: 23px;
-  -webkit-text-stroke: 1px #0A317D; /* Borda no texto */
+  -webkit-text-stroke: 1px #0A317D;
   paint-order: stroke fill;
   font-size: 26px;
 }
@@ -45,7 +40,7 @@ header h1 {
 .perfil {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
   font-size: 18px;
 }
 
@@ -54,10 +49,8 @@ header h1 {
   height: 30px;
   background: #ccc;
   border-radius: 50%;
-  top: -3px;
 }
 
-/* Container principal */
 .container {
   flex: 1;
   display: flex;
@@ -66,7 +59,6 @@ header h1 {
   padding: 50px 20px;
 }
 
-/* Caixa de busca e resultados */
 .search-box {
   background-color: #FFE5B4;
   color: #000;
@@ -78,13 +70,12 @@ header h1 {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Barra de busca */
 .search-bar {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 25px; /* espaço abaixo da barra */
+  margin-bottom: 25px;
 }
 
 .search-bar input {
@@ -100,7 +91,6 @@ header h1 {
   outline: none;
 }
 
-/* Botões */
 button {
   flex: 1;
   padding: 12px;
@@ -131,15 +121,13 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* Título das seções */
 .ofertas-text {
   font-weight: bold;
   text-align: center;
-  margin: 20px 0; /* espaço acima e abaixo */
+  margin: 20px 0;
   font-size: 18px;
 }
 
-/* Grid de cards (jogos) */
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
@@ -148,7 +136,6 @@ button:hover {
   margin-top: 10px;
 }
 
-/* Card individual */
 .card {
   background-color: #021D55;
   color: #fff;
@@ -169,7 +156,6 @@ button:hover {
   margin-bottom: 10px;
 }
 
-/* Botão de favoritar */
 .fav-btn {
   position: absolute;
   top: 10px;
@@ -187,7 +173,6 @@ button:hover {
   color: red;
 }
 
-/* Preços */
 .price-old {
   text-decoration: line-through;
   color: #aaa;
@@ -201,7 +186,6 @@ button:hover {
   margin-bottom: 10px;
 }
 
-/* Botão comprar */
 .buy-btn {
   display: inline-block;
   padding: 10px 15px;
@@ -217,7 +201,6 @@ button:hover {
   color: #fff;
 }
 
-/* Dark Mode */
 .darkmode {
   background-color: #0a0a0a;
   color: #f0f0f0;
@@ -236,7 +219,6 @@ button:hover {
   background: #000;
 }
 
-/* Rodapé */
 footer {
   text-align: center;
   padding: 20px;
@@ -252,4 +234,21 @@ footer a {
 
 footer a:hover {
   text-decoration: underline;
+}
+
+#btnLogout {
+  padding: 8px 15px; 
+  flex: initial; 
+  width: auto;
+  background-color: #d40202;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#btnLogout:hover {
+  background-color: #ab0303;
 }
