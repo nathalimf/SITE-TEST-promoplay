@@ -26,12 +26,11 @@ header {
   align-items: center;
   padding: 22px 25px;
   background: linear-gradient(-180deg, rgba(0, 15, 46, 1) 14%, rgba(2, 29, 85, 1) 100%);
-  
 }
 
 header h1 {
   font-size: 23px;
-  -webkit-text-stroke: 1px #0A317D; /* Borda no texto */
+  -webkit-text-stroke: 1px #0A317D;
   paint-order: stroke fill;
   font-size: 26px;
 }
@@ -44,21 +43,20 @@ nav {
 }
 
 nav a {
-  background-color: #facc15;
   padding: 10px;
-  border-radius: 15px;
-  color: #021D55;
-  font-weight: bold;
-  border: #ffff solid 3px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 0.5rem;
+  background-color: #facc15;
+  color: #172554;
+  font-weight: 700;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+  border: none;
 }
 
 nav a:hover {
-  background-color: #FFB936;
-  color: #ffff;
+  background-color: #fde047;
+  color: #172554;
 }
-
-/* ----------------------------------------------------- */
 
 .container {
   display: flex;
@@ -96,7 +94,7 @@ input {
   border-radius: 15px;
   margin-bottom: 10px;
   background-color: #021D55;
-  border: #ffff solid 2px;
+  border: #ffff solid 1px;
   font-size: 15px;
   color: #ffff;
   width: 300px;
@@ -106,16 +104,18 @@ button {
   padding: 10px;
   margin-top: 15px;
   background-color: #facc15;
-  border-radius: 15px;
-  font-weight: bold;
-  border: #ffff solid 3px;
-  color: #021D55;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  color: #172554;
+  font-weight: 700;
+  border-radius: 0.5rem;
+  border: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
 button:hover {
-  background-color: #FFB936;
-  color: #ffff;
+  background-color: #fde047;
+  color: #172554;
+  transform: scale(1.05);
 }
 
 footer {
@@ -124,8 +124,6 @@ footer {
   background-color: #011641;
   margin-top: 8%;
 }
-
-/* ajustes coin*/
 
 #coin {
   position: relative;
