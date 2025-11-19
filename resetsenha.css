@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+* {
+    font-family: "Josefin Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+body {
+    background-color: #021D55;
+    margin: 0px;
+    color: #ffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    text-decoration: none;
+    color: #FFC300;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 25px;
+    background: linear-gradient(-180deg, rgba(0, 15, 46, 1) 14%, rgba(2, 29, 85, 1) 100%);
+}
+
+header h1 {
+    font-size: 23px;
+    -webkit-text-stroke: 1px #0A317D;
+    paint-order: stroke fill;
+    font-size: 26px;
+}
+
+
+nav {
+    display: flex;
+    padding: 10px;
+    gap: 30px;
+}
+
+nav a {
+    padding: 10px;
+    border-radius: 0.5rem;
+    background-color: #facc15;
+    color: #172554;
+    font-weight: 700;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #fde047;
+    color: #172554;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    align-items: center;
+}
+
+h2 {
+    text-align: left;
+    font-size: 28px;
+}
+
+form {
+    background: linear-gradient(0deg,rgba(49, 89, 134, 1) 0%, rgba(2, 29, 85, 1) 100%);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    border: #6b7daf solid 0.3px;
+    padding: 60px 100px 60px 100px;
+}
+
+form h2 {
+    text-align: left;
+}
+
+label {
+    font-size: 21px;
+    text-align: left;
+}
+
+input {
+    padding: 10px;
+    border-radius: 15px;
+    margin-bottom: 5px;
+    background-color: #021D55;
+    border: #ffff solid 1px;
+    font-size: 15px;
+    color: #ffff;
+    width: 100%;
+}
+
+span {
+    margin-top: 30px;
+}
+
+button {
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #facc15;
+    color: #172554;
+    font-weight: 700;
+    border-radius: 0.5rem;
+    border: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    width: 20%;
+}
+
+button:hover {
+    background-color: #fde047;
+    color: #172554;
+    transform: scale(1.05);
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #011641;
+    margin-top: 8%;
+}
+
+#coin {
+    position: relative;
+    vertical-align: -4px;
+    left: -2px;
+}
