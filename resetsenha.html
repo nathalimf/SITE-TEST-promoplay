@@ -1,37 +1,42 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="resetsenha.css">
-  <script type="module" src="resetsenha.js"></script>
-  <link rel="icon" type="image/png" href=https://i.postimg.cc/3NNfpt6c/pixel-arte-jogos-moeda-moeda-removebg-preview.png">
-  <title>Reset de senha</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redefinir Senha</title>
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/3NNfpt6c/pixel-arte-jogos-moeda-moeda-removebg-preview.png">
+    <link rel="stylesheet" href="resetsenha.css">
 </head>
 <body>
+    
     <header>
-    <h1>Promoplay <img src="https://i.postimg.cc/KvqKdbyP/image.png" alt="coin" id="coin" height="21px"></h1><a href="index.html"></a>
-    <nav>
-      <a href="login.html">Login</a>
-      <a href="cadastro.html">Cadastrar-se</a>
-    </nav>
-  </header>
-  
-  <div class="container">
-    <form id="loginForm">
-      <h2>Redefinir senha</h2>
-      <label for="email">E-mail</label><br>
-      <input type="email" id="email" placeholder="Digite o seu email" required><br>
-      <button type="submit">Enviar e-mail</button>
-      <span></span>*Será enviado um e-mail para sua caixa de entrada. Verifique a pasta de spam. <span>
-    </form>
-  </div>
-    <footer class="footer">
-        <p>&copy; 2025 Promoplay. Todos os direitos reservados.</p>
-        <p class="footer-credit">
-            <div>Dados fornecidos por <a href="https://www.cheapshark.com/">Cheapshark</a>. Para mais informações, entre em contato com promoplay@gmail.com</div>
-        </p>
-    </footer>
+        <h1>Promoplay <img src="https://i.postimg.cc/KvqKdbyP/image.png" alt="coin" id="coin" height="25px"></h1>
+        <nav>
+            <a href="#">Entrar</a>
+            <a href="#">Cadastrar</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <form id="loginForm">
+            <h2>Redefinir Senha</h2>
+            
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" required placeholder="Digite seu e-mail de cadastro">
+            
+            <p><a href="login.html">Lembrou a senha? Voltar para o Login</a></p>
+
+            <button type="submit">Enviar Link de Reset</button>
+            
+            <span id="messageDisplay"></span>
+        </form>
+    </div>
+
+    <footer>
+    Dados por <a href="https://www.cheapshark.com/">CheapShark</a>.  
+    Para mais informações, entre em contato com promoplay@gmail.com
+  </footer>
+
+    <script src="resetsenha.js" defer></script>
 </body>
 </html>
