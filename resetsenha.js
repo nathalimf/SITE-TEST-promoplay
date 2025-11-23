@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 const firebaseConfig = {
-    apiKey: "SUA_API_KEY",
-    authDomain: "SEU_PROJETO.firebaseapp.com",
-    projectId: "SEU_PROJECT_ID",
-    storageBucket: "SEU_PROJECT_ID.appspot.com",
-    messagingSenderId: "SEU_SENDER_ID",
-    appId: "SEU_APP_ID"
+    apiKey: "AIzaSyDzeG_ZpM-EspayYL575yQr9qKcp3s9Wbk",
+    authDomain: "promoplay-ab631.firebaseapp.com",
+    projectId: "promoplay-ab631",
+    storageBucket: "promoplay-ab631.appspot.com",
+    appId: "1:1017595249150:web:157fdb7cc4237436dc00af", 
+    measurementId: "G-HX6WVJWQ33"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -15,7 +15,7 @@ const auth = getAuth(app);
 
 const resetForm = document.getElementById('loginForm');
 const emailInput = document.getElementById('email');
-const messageDisplay = resetForm.querySelector('span');
+const messageDisplay = document.getElementById('messageDisplay');
 
 
 function handlePasswordReset(event) {
@@ -23,8 +23,14 @@ function handlePasswordReset(event) {
     
     const email = emailInput.value.trim(); 
     
-    messageDisplay.innerHTML = "";
-    messageDisplay.style.color = "";
+
+    if (messageDisplay) {
+        messageDisplay.innerHTML = "";
+        messageDisplay.style.color = "";
+    } else {
+        console.error('Elemento messageDisplay não encontrado.');
+        return;
+    }
 
     if (!email) {
         messageDisplay.innerHTML = "Por favor, digite seu e-mail.";
@@ -41,7 +47,7 @@ function handlePasswordReset(event) {
         })
         .catch((error) => {
             const errorCode = error.code;
-            
+
             if (errorCode === 'auth/user-not-found' || errorCode === 'auth/invalid-email') {
                 messageDisplay.innerHTML = "✅ <strong>E-mail enviado!</strong> Verifique sua caixa de entrada e, se necessário, a pasta de spam.";
                 messageDisplay.style.color = "lightgreen";
@@ -52,4 +58,8 @@ function handlePasswordReset(event) {
         });
 }
 
-resetForm.addEventListener('submit', handlePasswordReset);
+if (resetForm) {
+    resetForm.addEventListener('submit', handlePasswordReset);
+} else {
+    console.error('Elemento loginForm não encontrado. Verifique o HTML.');
+}
