@@ -48,10 +48,12 @@ function handlePasswordReset(event) {
         .catch((error) => {
             const errorCode = error.code;
 
+            // Mantém a segurança: exibe sucesso para "usuário não encontrado" ou "e-mail inválido"
             if (errorCode === 'auth/user-not-found' || errorCode === 'auth/invalid-email') {
                 messageDisplay.innerHTML = "✅ <strong>E-mail enviado!</strong> Verifique sua caixa de entrada e, se necessário, a pasta de spam.";
                 messageDisplay.style.color = "lightgreen";
             } else {
+                // Exibe outros erros, como problemas de rede ou domínio não autorizado
                 messageDisplay.innerHTML = `❌ Ocorreu um erro (${errorCode}). Tente novamente mais tarde.`;
                 messageDisplay.style.color = "red";
             }
@@ -63,3 +65,4 @@ if (resetForm) {
 } else {
     console.error('Elemento loginForm não encontrado. Verifique o HTML.');
 }
+// ❌ CHAVE EXTRA REMOVIDA
