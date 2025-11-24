@@ -1,6 +1,3 @@
-import { initializeApp } from "firebase/app";
-import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-
 const firebaseConfig = {
     apiKey: "AIzaSyDzeG_ZpM-EspayYL575yQr9qKcp3s9Wbk",
     authDomain: "promoplay-ab631.firebaseapp.com",
@@ -10,8 +7,8 @@ const firebaseConfig = {
     measurementId: "G-HX6WVJWQ33"
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app); 
+const app = firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth(app);
 
 const resetForm = document.getElementById('loginForm');
 const emailInput = document.getElementById('email');
@@ -38,7 +35,7 @@ function handlePasswordReset(event) {
         return;
     }
 
-    sendPasswordResetEmail(auth, email)
+    auth.sendPasswordResetEmail(email)
         .then(() => {
             messageDisplay.innerHTML = "✅ <strong>E-mail enviado!</strong> Verifique sua caixa de entrada e, se necessário, a pasta de spam.";
             messageDisplay.style.color = "lightgreen";
@@ -48,12 +45,10 @@ function handlePasswordReset(event) {
         .catch((error) => {
             const errorCode = error.code;
 
-            // Mantém a segurança: exibe sucesso para "usuário não encontrado" ou "e-mail inválido"
             if (errorCode === 'auth/user-not-found' || errorCode === 'auth/invalid-email') {
                 messageDisplay.innerHTML = "✅ <strong>E-mail enviado!</strong> Verifique sua caixa de entrada e, se necessário, a pasta de spam.";
                 messageDisplay.style.color = "lightgreen";
             } else {
-                // Exibe outros erros, como problemas de rede ou domínio não autorizado
                 messageDisplay.innerHTML = `❌ Ocorreu um erro (${errorCode}). Tente novamente mais tarde.`;
                 messageDisplay.style.color = "red";
             }
@@ -65,4 +60,3 @@ if (resetForm) {
 } else {
     console.error('Elemento loginForm não encontrado. Verifique o HTML.');
 }
-// ❌ CHAVE EXTRA REMOVIDA
