@@ -25,6 +25,18 @@ document.getElementById("cadastroForm").addEventListener("submit", async (e) => 
     await createUserWithEmailAndPassword(auth, email, senha);
     alert("Cadastro realizado com sucesso!");
   } catch (error) {
-    alert("Erro: " + error.message);
+    let mensagem = "Ocorreu um erro ao cadastrar.";
+
+    if (error.code === 'auth/email-already-in-use') {
+      mensagem = "O e-mail inserido já está sendo utilizado. Faça o login ou redefina a senha.";
+    } else if (error.code === 'auth/weak-password') {
+      mensagem = "A senha é muito fraca. Mínimo 6 caracteres.";
+    } else if (error.code === 'auth/invalid-email') {
+      mensagem = "O e-mail digitado é inválido.";
+    } else {
+      mensagem = "Erro: " + error.message;
+    }
+
+    alert(mensagem);
   }
 });
