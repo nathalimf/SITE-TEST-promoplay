@@ -25,12 +25,11 @@ let isLoading = false;
 let currentUser = null;
 let favoritos = [];
 
-
-
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     currentUser = user; 
 
+    // Atualiza Nome
     const emailDisplay = document.getElementById("userEmailDisplay");
     if (emailDisplay) {
         if (user.displayName && user.displayName.trim() !== "") {
@@ -39,6 +38,30 @@ onAuthStateChanged(auth, async (user) => {
             emailDisplay.innerText = user.email.split('@')[0];
         }
     }
+
+
+    const imgContainer = document.getElementById("userProfileImageContainer");
+    if (imgContainer) {
+        let photoURL = user.photoURL;
+        
+        if (!photoURL) {
+            try {
+                const userDoc = await getDoc(doc(db, "users", user.uid));
+                if (userDoc.exists() && userDoc.data().photoURL) {
+                    photoURL = userDoc.data().photoURL;
+                }
+            } catch (e) {
+                console.log("Erro ao buscar foto extra:", e);
+            }
+        }
+
+        if (photoURL) {
+            imgContainer.style.backgroundImage = `url('${photoURL}')`;
+            imgContainer.style.backgroundSize = "cover";
+            imgContainer.style.backgroundPosition = "center";
+        }
+    }
+
 
     await carregarFavoritosDoBanco();
     carregarJogos();
@@ -65,7 +88,6 @@ if (btnLogout) {
 async function carregarFavoritosDoBanco() {
   if (!currentUser) return;
 
-
   const docRef = doc(db, "users", currentUser.uid); 
   const docSnap = await getDoc(docRef);
 
@@ -76,8 +98,6 @@ async function carregarFavoritosDoBanco() {
   }
   renderJogos();
 }
-
-
 
 function toggleDarkMode() {
   document.body.classList.toggle("darkmode");
@@ -99,7 +119,6 @@ function criarCard(game) {
     if (!currentUser) return;
 
     const index = favoritos.findIndex(f => f.dealID === game.dealID);
-
     
     const userRef = doc(db, "users", currentUser.uid);
 
@@ -179,7 +198,6 @@ function renderJogos() {
   gameList.innerHTML = "";
   allGames.forEach(game => gameList.appendChild(criarCard(game)));
 }
-
 
 document.addEventListener("DOMContentLoaded", () => {
 
