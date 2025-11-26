@@ -25,10 +25,11 @@ let isLoading = false;
 let currentUser = null;
 let favoritos = [];
 
-// --- Autenticação e Logout ---
+
 
 onAuthStateChanged(auth, async (user) => {
   if (user) {
+    currentUser = user; 
 
     const emailDisplay = document.getElementById("userEmailDisplay");
     if (emailDisplay) {
@@ -48,7 +49,7 @@ onAuthStateChanged(auth, async (user) => {
 });
 
 
-// Lógica do Botão Sair
+// logout
 const btnLogout = document.getElementById("btnLogout");
 if (btnLogout) {
   btnLogout.addEventListener("click", () => {
@@ -64,7 +65,8 @@ if (btnLogout) {
 async function carregarFavoritosDoBanco() {
   if (!currentUser) return;
 
-  const docRef = doc(db, "usuarios", currentUser.uid);
+
+  const docRef = doc(db, "users", currentUser.uid); 
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists() && docSnap.data().favoritos) {
@@ -75,7 +77,7 @@ async function carregarFavoritosDoBanco() {
   renderJogos();
 }
 
-// --- Lógica do Site ---
+
 
 function toggleDarkMode() {
   document.body.classList.toggle("darkmode");
@@ -97,7 +99,9 @@ function criarCard(game) {
     if (!currentUser) return;
 
     const index = favoritos.findIndex(f => f.dealID === game.dealID);
-    const userRef = doc(db, "usuarios", currentUser.uid);
+
+    
+    const userRef = doc(db, "users", currentUser.uid);
 
     if (index !== -1) {
       favoritos.splice(index, 1);
@@ -176,7 +180,6 @@ function renderJogos() {
   allGames.forEach(game => gameList.appendChild(criarCard(game)));
 }
 
-// --- Event Listeners ---
 
 document.addEventListener("DOMContentLoaded", () => {
 
