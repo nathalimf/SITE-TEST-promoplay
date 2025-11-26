@@ -93,6 +93,7 @@ header h1 {
     align-self: flex-start;
     margin-bottom: 15px;
     color: #FFC300;
+    font-weight: bold;
 }
 
 .profile-pic {
@@ -108,7 +109,7 @@ header h1 {
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid #ffff;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     background-color: #021D55;
 }
 
@@ -122,7 +123,7 @@ form {
     border: none;
 }
 
-.input-group {
+.form-group {
     display: flex;
     flex-direction: column;
     text-align: left;
@@ -171,4 +172,27 @@ button:disabled {
     background-color: #ccc;
     cursor: not-allowed;
     transform: none;
+}
+
+#file-upload {
+    display: none;
+}
+
+.file-label {
+    background-color: #facc15;
+    color: #172554;
+    padding: 8px 16px;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    text-align: center;
+}
+
+.file-label:hover {
+    background-color: #fde047;
+    transform: scale(1.05);
 }
