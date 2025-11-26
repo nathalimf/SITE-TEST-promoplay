@@ -19,121 +19,23 @@
     <main class="container">
         <div class="form-container">
             <h2>Configurações de Perfil</h2>
-            <div><a href="home.html"></a></div>
-
+            <div><a href="home.html" class="back-link">↩ Voltar</a></div>
             <form>
-                <div class="profile-pic">
-                  <img id="profile-image-preview">
-                    <input id="file-upload" type="file">
-                    <label for="file-upload" class="file-label">Alterar foto de perfil</label>
-            </div>
-
-
-                <div class="form-group">
-                    <label for="username">Nome de usuário</label>
-                    <input type="text" id="username" placeholder="Insira o seu novo nome de usuário">
+                <div class="input-group">
+                    <label for="username">Nome de Usuário</label>
+                    <input type="text" id="username" placeholder="Seu nome">
                 </div>
 
-                <div class="form-group">
+                <div class="input-group">
                     <label for="email">E-mail</label>
-                    <input type="email" id="email" placeholder="Insira o seu novo e-mail">
+                    <input type="email" id="email" placeholder="seuemail@email.com">
                 </div>
 
-                <button type="submit" class="btn-submit">Salvar Alterações</button>
+                <button type="submit">Salvar Alterações</button>
             </form>
         </div>
     </main>
 
-    <!-- ==========================
-         JAVASCRIPT DO FIREBASE
-    ========================== -->
-    <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import { getAuth, onAuthStateChanged, updateEmail, updateProfile } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDzeG_ZpM-EspayYL575yQr9qKcp3s9Wbk",
-  authDomain: "promoplay-ab631.firebaseapp.com",
-  projectId: "promoplay-ab631",
-  storageBucket: "promoplay-ab631.appspot.com",
-  messagingSenderId: "1017595249150",
-  appId: "1:1017595249150:web:157fdb7cc4237436dc00af",
-  measurementId: "G-HX6WVJWQ33"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth();
-const db = getFirestore();
-const storage = getStorage();
-
-const usernameInput = document.getElementById("username");
-const emailInput = document.getElementById("email");
-
-// CARREGA DADOS DO USUÁRIO
-onAuthStateChanged(auth, async (user) => {
-    if (!user) {
-        console.log("Nenhum usuário logado.");
-        return;
-    }
-
-    console.log("Usuário logado:", user);
-
-    // Dados básicos
-    usernameInput.value = user.displayName || "";
-    emailInput.value = user.email || "";
-
-    // Tenta buscar dados no Firestore
-    const docRef = doc(db, "users", user.uid);
-    const snap = await getDoc(docRef);
-
-    if (snap.exists()) {
-        const data = snap.data();
-
-        if (data.displayName) usernameInput.value = data.displayName;
-        if (data.email) emailInput.value = data.email;
-    }
-});
-
-// SALVAR ALTERAÇÕES
-document.querySelector("form").addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const user = auth.currentUser;
-    if (!user) return;
-
-    const name = usernameInput.value;
-    const email = emailInput.value;
-
-    try {
-        // Atualiza nome no Auth
-        await updateProfile(user, { displayName: name });
-
-        // Atualiza email
-        if (email !== user.email) {
-            await updateEmail(user, email);
-        }
-
-        // Salva no Firestore
-        await setDoc(doc(db, "users", user.uid), {
-            displayName: name,
-            email: email
-        }, { merge: true });
-
-        // Mensagem de sucesso
-        alert("Perfil atualizado com sucesso!");
-
-        // Redirecionar para Home
-        window.location.href = "home.html";
-
-    } catch (error) {
-        console.error(error);
-        alert("Erro ao atualizar perfil: " + error.message);
-    }
-});
-
-</script>
-
+    <script type="module" src="profile.js"></script>
 </body>
 </html>
