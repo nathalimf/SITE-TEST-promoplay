@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
-import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove } 
+import { getFirestore, doc, getDoc, setDoc, updateDoc, arrayUnion, arrayRemove }
   from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -22,19 +22,21 @@ const PAGE_SIZE = 15;
 let allGames = [];
 let currentSearch = '';
 let isLoading = false;
-let currentUser = null; 
-let favoritos = []; 
+let currentUser = null;
+let favoritos = [];
 
 // --- Autenticação e Logout ---
 
 onAuthStateChanged(auth, async (user) => {
   if (user) {
-    currentUser = user;
-    
-    // Atualiza o texto "Perfil" para o email do usuário
+
     const emailDisplay = document.getElementById("userEmailDisplay");
-    if(emailDisplay) {
-        emailDisplay.innerText = user.email.split('@')[0];
+    if (emailDisplay) {
+        if (user.displayName && user.displayName.trim() !== "") {
+            emailDisplay.innerText = user.displayName;
+        } else {
+            emailDisplay.innerText = user.email.split('@')[0];
+        }
     }
 
     await carregarFavoritosDoBanco();
@@ -44,6 +46,7 @@ onAuthStateChanged(auth, async (user) => {
     window.location.href = "index.html";
   }
 });
+
 
 // Lógica do Botão Sair
 const btnLogout = document.getElementById("btnLogout");
@@ -94,12 +97,12 @@ function criarCard(game) {
     if (!currentUser) return;
 
     const index = favoritos.findIndex(f => f.dealID === game.dealID);
-    const userRef = doc(db, "usuarios", currentUser.uid); 
+    const userRef = doc(db, "usuarios", currentUser.uid);
 
     if (index !== -1) {
       favoritos.splice(index, 1);
       favBtn.classList.remove("favorited");
-      
+
       await updateDoc(userRef, {
         favoritos: arrayRemove(game)
       });
@@ -176,34 +179,34 @@ function renderJogos() {
 // --- Event Listeners ---
 
 document.addEventListener("DOMContentLoaded", () => {
-  
-    document.querySelector(".buscar-btn").addEventListener("click", () => {
-      currentSearch = document.getElementById("searchInput").value.trim();
-      paginaAtual = 0;
-      carregarJogos(0, currentSearch, false);
-      document.getElementById("ofertasText").innerText = "🎯 Resultados da busca";
-    });
-  
-    document.querySelector(".voltar-btn").addEventListener("click", () => {
-      currentSearch = '';
-      paginaAtual = 0;
-      document.getElementById("searchInput").value = '';
-      document.getElementById("ofertasText").innerText = "🎮 Ofertas em destaque";
-      carregarJogos(0, '', false);
-    });
-  
-    document.querySelector(".darkmode-btn").addEventListener("click", toggleDarkMode);
+
+  document.querySelector(".buscar-btn").addEventListener("click", () => {
+    currentSearch = document.getElementById("searchInput").value.trim();
+    paginaAtual = 0;
+    carregarJogos(0, currentSearch, false);
+    document.getElementById("ofertasText").innerText = "🎯 Resultados da busca";
   });
-  
-  document.querySelector(".favoritos-btn").addEventListener("click", () => {
-    const gameList = document.getElementById("gameList");
-    gameList.innerHTML = '';
-  
-    if (favoritos.length === 0) {
-      gameList.innerHTML = '<p>Nenhum favorito salvo.</p>';
-    } else {
-      favoritos.forEach(game => gameList.appendChild(criarCard(game)));
-    }
-  
-    document.getElementById("ofertasText").innerText = "❤️ Meus Favoritos";
+
+  document.querySelector(".voltar-btn").addEventListener("click", () => {
+    currentSearch = '';
+    paginaAtual = 0;
+    document.getElementById("searchInput").value = '';
+    document.getElementById("ofertasText").innerText = "🎮 Ofertas em destaque";
+    carregarJogos(0, '', false);
   });
+
+  document.querySelector(".darkmode-btn").addEventListener("click", toggleDarkMode);
+});
+
+document.querySelector(".favoritos-btn").addEventListener("click", () => {
+  const gameList = document.getElementById("gameList");
+  gameList.innerHTML = '';
+
+  if (favoritos.length === 0) {
+    gameList.innerHTML = '<p>Nenhum favorito salvo.</p>';
+  } else {
+    favoritos.forEach(game => gameList.appendChild(criarCard(game)));
+  }
+
+  document.getElementById("ofertasText").innerText = "❤️ Meus Favoritos";
+});

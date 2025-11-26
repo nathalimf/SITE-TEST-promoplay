@@ -19,14 +19,15 @@
     <main class="container">
         <div class="form-container">
             <h2>Configurações de Perfil</h2>
-            <div><a href="home.html"><</a></div>
+            <div><a href="home.html"></a></div>
 
             <form>
                 <div class="profile-pic">
-                    <img src="https://i.ibb.co/jvstKscb/Captura-de-tela-2025-10-28-160138.png" alt="Foto de Perfil Atual" id="profile-image-preview">
+                  <img id="profile-image-preview">
+                    <input id="file-upload" type="file">
                     <label for="file-upload" class="file-label">Alterar foto de perfil</label>
-                    <input id="file-upload" type="file" accept="image/*">
-                </div>
+            </div>
+
 
                 <div class="form-group">
                     <label for="username">Nome de usuário</label>
@@ -47,96 +48,92 @@
          JAVASCRIPT DO FIREBASE
     ========================== -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, updateEmail, updateProfile } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, updateEmail, updateProfile } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js";
 
-        // COLOQUE SUA CONFIG Firebase AQUI
-        const firebaseConfig = {
-         apiKey: "AIzaSyDzeG_ZpM-EspayYL575yQr9qKcp3s9Wbk",
-         authDomain: "promoplay-ab631.firebaseapp.com",
-         projectId: "promoplay-ab631",
-         storageBucket: "promoplay-ab631.firebasestorage.app",
-         messagingSenderId: "1017595249150",
-         appId: "1:1017595249150:web:157fdb7cc4237436dc00af",
+const firebaseConfig = {
+  apiKey: "AIzaSyDzeG_ZpM-EspayYL575yQr9qKcp3s9Wbk",
+  authDomain: "promoplay-ab631.firebaseapp.com",
+  projectId: "promoplay-ab631",
+  storageBucket: "promoplay-ab631.appspot.com",
+  messagingSenderId: "1017595249150",
+  appId: "1:1017595249150:web:157fdb7cc4237436dc00af",
+  measurementId: "G-HX6WVJWQ33"
 };
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth();
-        const db = getFirestore();
-        const storage = getStorage();
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+const db = getFirestore();
+const storage = getStorage();
 
-        const usernameInput = document.getElementById("username");
-        const emailInput = document.getElementById("email");
-        const profilePreview = document.getElementById("profile-image-preview");
-        const fileInput = document.getElementById("file-upload");
+const usernameInput = document.getElementById("username");
+const emailInput = document.getElementById("email");
 
-        let newProfileImageFile = null;
+// CARREGA DADOS DO USUÁRIO
+onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+        console.log("Nenhum usuário logado.");
+        return;
+    }
 
-        fileInput.addEventListener("change", () => {
-            newProfileImageFile = fileInput.files[0];
-            if (newProfileImageFile) {
-                profilePreview.src = URL.createObjectURL(newProfileImageFile);
-            }
-        });
+    console.log("Usuário logado:", user);
 
-        onAuthStateChanged(auth, async (user) => {
-            if (!user) {
-                alert("Você precisa estar logado!");
-                window.location.href = "login.html";
-                return;
-            }
+    // Dados básicos
+    usernameInput.value = user.displayName || "";
+    emailInput.value = user.email || "";
 
-            usernameInput.value = user.displayName || "";
-            emailInput.value = user.email || "";
+    // Tenta buscar dados no Firestore
+    const docRef = doc(db, "users", user.uid);
+    const snap = await getDoc(docRef);
 
-            const userRef = doc(db, "users", user.uid);
-            const snap = await getDoc(userRef);
+    if (snap.exists()) {
+        const data = snap.data();
 
-            if (snap.exists()) {
-                const data = snap.data();
-                if (data.photoURL) profilePreview.src = data.photoURL;
-            }
-        });
+        if (data.displayName) usernameInput.value = data.displayName;
+        if (data.email) emailInput.value = data.email;
+    }
+});
 
-        document.querySelector("form").addEventListener("submit", async (e) => {
-            e.preventDefault();
+// SALVAR ALTERAÇÕES
+document.querySelector("form").addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-            const user = auth.currentUser;
-            if (!user) return;
+    const user = auth.currentUser;
+    if (!user) return;
 
-            const newName = usernameInput.value;
-            const newEmail = emailInput.value;
+    const name = usernameInput.value;
+    const email = emailInput.value;
 
-            try {
-                await updateProfile(user, { displayName: newName });
+    try {
+        // Atualiza nome no Auth
+        await updateProfile(user, { displayName: name });
 
-                if (newEmail !== user.email) {
-                    await updateEmail(user, newEmail);
-                }
+        // Atualiza email
+        if (email !== user.email) {
+            await updateEmail(user, email);
+        }
 
-                let photoURL = user.photoURL;
+        // Salva no Firestore
+        await setDoc(doc(db, "users", user.uid), {
+            displayName: name,
+            email: email
+        }, { merge: true });
 
-                if (newProfileImageFile) {
-                    const imgRef = ref(storage, `profilePics/${user.uid}.jpg`);
-                    await uploadBytes(imgRef, newProfileImageFile);
-                    photoURL = await getDownloadURL(imgRef);
-                    await updateProfile(user, { photoURL });
-                }
+        // Mensagem de sucesso
+        alert("Perfil atualizado com sucesso!");
 
-                await setDoc(doc(db, "users", user.uid), {
-                    displayName: newName,
-                    email: newEmail,
-                    photoURL
-                }, { merge: true });
+        // Redirecionar para Home
+        window.location.href = "home.html";
 
-                alert("Perfil atualizado com sucesso!");
-            } catch (err) {
-                console.error(err);
-                alert("Erro ao atualizar: " + err.message);
-            }
-        });
-    </script>
+    } catch (error) {
+        console.error(error);
+        alert("Erro ao atualizar perfil: " + error.message);
+    }
+});
+
+</script>
+
 </body>
 </html>

@@ -2,24 +2,9 @@
 //  IMPORTS DO FIREBASE
 // =============================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-import { 
-    getAuth, 
-    onAuthStateChanged, 
-    updateEmail, 
-    updateProfile 
-} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
-import { 
-    getFirestore, 
-    doc, 
-    getDoc, 
-    setDoc 
-} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
-import { 
-    getStorage, 
-    ref, 
-    uploadBytes, 
-    getDownloadURL 
-} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js";
+import { getAuth, onAuthStateChanged, updateEmail, updateProfile} from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-storage.js";
 
 // =============================
 //  CONFIG DO FIREBASE (PREENCHA)
@@ -28,7 +13,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyDzeG_ZpM-EspayYL575yQr9qKcp3s9Wbk",
   authDomain: "promoplay-ab631.firebaseapp.com",
   projectId: "promoplay-ab631",
-  storageBucket: "promoplay-ab631.firebasestorage.app",
+  storageBucket: "promoplay-ab631.appspot.com",
   messagingSenderId: "1017595249150",
   appId: "1:1017595249150:web:157fdb7cc4237436dc00af",
 };
