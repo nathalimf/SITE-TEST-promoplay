@@ -1,40 +1,32 @@
-// Espera todo o conteúdo do HTML (DOM) ser carregado antes de executar o script.
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. LÓGICA DOS BOTÕES (Login / Criar Conta) ---
-    // (Como solicitado, esta parte vem primeiro)
 
-    // Seleciona os botões da página de apresentação
     const navLoginButton = document.querySelector('.nav-button');
     const createAccountButton = document.querySelector('.action-button.primary');
     const signInButton = document.querySelector('.action-button.secondary');
 
-    // Adiciona evento para o botão "Fazer login" no header
+
     if (navLoginButton) {
         navLoginButton.addEventListener('click', (e) => {
-            e.preventDefault(); // Previne a ação padrão do link '#'
+            e.preventDefault();
             console.log('Botão "Fazer login" clicado.');
-            // Substitua 'login.html' pela sua página de login real
             window.location.href = 'login.html'; 
         });
     }
 
-    // Adiciona evento para o botão "Criar minha conta"
+
     if (createAccountButton) {
         createAccountButton.addEventListener('click', (e) => {
             e.preventDefault();
             console.log('Botão "Criar minha conta" clicado.');
-            // Substitua 'register.html' pela sua página de registro real
             window.location.href = 'cadastro.html';
         });
     }
 
-    // Adiciona evento para o botão "Entrar (Já tenho conta)"
     if (signInButton) {
         signInButton.addEventListener('click', (e) => {
             e.preventDefault();
             console.log('Botão "Entrar" clicado.');
-            // Substitua 'login.html' pela sua página de login real
             window.location.href = 'login.html';
         });
     }
@@ -112,4 +104,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     updateArrows(currentIndex);
 });
+
 
